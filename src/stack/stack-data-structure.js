@@ -5,24 +5,36 @@ class Stack {
   }
 
   canPush() {
-    // ... your code goes here
+    // Devuelve true si aún hay espacio en la pila
+    return this.stackControl.length < this.MAX_SIZE;
   }
 
   isEmpty() {
-    // ... your code goes here
+    // Devuelve true si no hay elementos en la pila
+    return this.stackControl.length === 0;
   }
 
   push(item) {
-    // ... your code goes here
+    // Agrega un elemento al tope de la pila
+    if (!this.canPush()) {
+      throw new Error('STACK_OVERFLOW');
+    }
+    this.stackControl.push(item);
+    return this.stackControl;
   }
 
   pop() {
-    // ... your code goes here
+    // Saca el último elemento agregado (LIFO)
+    if (this.isEmpty()) {
+      throw new Error('STACK_UNDERFLOW');
+    }
+    return this.stackControl.pop();
   }
 
   display() {
-    // ... your code goes here
-  }  
+    // Devuelve una copia del contenido actual de la pila
+    return [...this.stackControl];
+  }
 }
 
 // This is required to enable the automated tests, please ignore it.

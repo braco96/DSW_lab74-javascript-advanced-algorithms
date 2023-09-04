@@ -5,24 +5,36 @@ class Queue {
   }
 
   canEnqueue() {
-    // ... your code goes here
+    // Devuelve true si aún hay espacio en la cola
+    return this.queueControl.length < this.MAX_SIZE;
   }
 
   isEmpty() {
-    // ... your code goes here
+    // Devuelve true si no hay elementos en la cola
+    return this.queueControl.length === 0;
   }
 
   enqueue(item) {
-    // ... your code goes here
+    // Agrega un elemento al final de la cola
+    if (!this.canEnqueue()) {
+      throw new Error('QUEUE_OVERFLOW');
+    }
+    this.queueControl.push(item);
+    return this.queueControl;
   }
 
   dequeue() {
-    // ... your code goes here
+    // Saca el primer elemento de la cola (FIFO)
+    if (this.isEmpty()) {
+      throw new Error('QUEUE_UNDERFLOW');
+    }
+    return this.queueControl.shift();
   }
 
   display() {
-    // ... your code goes here
-  }  
+    // Devuelve una copia de la cola actual
+    return [...this.queueControl];
+  }
 }
 
 // This is required to enable the automated tests, please ignore it.

@@ -10,36 +10,71 @@ const dequeue = document.querySelector('.btn-take-dequeue');
 const queue = new Queue();
 
 const clearQueueInput = () => {
-  // ... your code goes here
+  // Vaciar el campo de texto después de encolar
+  queueInput.value = '';
 };
 
 const generateListQueue = () => {
-  // ... your code goes here
+  // Reconstruir la representación visual de la cola
+  warningTopQueue.style.display = 'none';
+  warningBottomQueue.style.display = 'none';
+  queueUL.innerHTML = '';
+
+  const contents = queue.display();
+  const length = contents.length;
+  const emptySlots = queue.MAX_SIZE - length;
+
+  // Elementos activos
+  contents.forEach((item) => {
+    const li = document.createElement('li');
+    li.className = 'active';
+    li.innerText = item;
+    queueUL.appendChild(li);
+  });
+
+  // Espacios vacíos
+  for (let i = 0; i < emptySlots; i++) {
+    const li = document.createElement('li');
+    li.className = 'inactive';
+    li.innerHTML = '&nbsp;';
+    queueUL.appendChild(li);
+  }
 };
 
 generateListQueue();
 
 const generateWarningQueue = (type) => {
   if (type === 'underflow') {
-    // ... your code goes here
+    // Avisar de cola vacía
+    warningBottomQueue.style.display = 'block';
+    warningBottomQueue.innerText = type;
   } else if (type === 'overflow') {
-    // ... your code goes here
+    // Avisar de cola llena
+    warningTopQueue.style.display = 'block';
+    warningTopQueue.innerText = type;
   }
 };
 
 const addToQueue = () => {
   try {
-    // ... your code goes here
+    // Intentar encolar el valor
+    queue.enqueue(queueInput.value);
+    clearQueueInput();
+    generateListQueue();
   } catch (error) {
-    // there was an overflow error, handle it
+    // Cola llena → mostrar overflow
+    generateWarningQueue('overflow');
   }
 };
 
 const removeFromQueue = () => {
   try {
-    // ... your code goes here
+    // Intentar desencolar
+    queue.dequeue();
+    generateListQueue();
   } catch (error) {
-    // there was an underflow error, handle it
+    // Cola vacía → mostrar underflow
+    generateWarningQueue('underflow');
   }
 };
 
