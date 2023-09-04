@@ -4,7 +4,9 @@
 
 ## Pre: Tareas que hemos realizado
 - He implementado la lógica de pilas y colas.
+
 - He controlado los errores de overflow y underflow.
+
 - He preparado la interfaz para mostrar las estructuras.
 
 ## Learning Goals
